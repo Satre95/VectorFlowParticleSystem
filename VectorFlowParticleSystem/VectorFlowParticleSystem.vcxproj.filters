@@ -81,4 +81,7 @@
   <ItemGroup>
     <ResourceCompile Include="icon.rc" />
   </ItemGroup>
+  <ItemGroup>
+    <None Include="bin\data\computeParticles.glsl" />
+  </ItemGroup>
 </Project>

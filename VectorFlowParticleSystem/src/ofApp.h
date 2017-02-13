@@ -21,4 +21,15 @@ class ofApp : public ofBaseApp{
 		void dragEvent(ofDragInfo dragInfo);
 		void gotMessage(ofMessage msg);
 		
+		struct Particle {
+			ofVec4f position;
+			ofVec4f velocity;
+			ofVec4f color;
+		};
+
+		ofShader computeShader;
+		vector<Particle> particles;
+		ofBufferObject particlesBuff1, particlesBuff2;
+
+
 };

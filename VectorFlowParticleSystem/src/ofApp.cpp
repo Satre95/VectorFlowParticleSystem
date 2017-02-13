@@ -2,6 +2,15 @@
 
 //--------------------------------------------------------------
 void ofApp::setup(){
+	computeShader.setupShaderFromFile(GL_COMPUTE_SHADER, "computeParticles.glsl");
+	computeShader.linkProgram();
+
+	particles.resize(numParticles);
+	for (auto & p : particles) {
+		p.position = randomPointInSphere(5.0f);
+		p.velocity = ofVec4f(0);
+		p.color = randomPointInSphere(1.0f);
+	}
 
 }
 
@@ -67,5 +76,21 @@ void ofApp::gotMessage(ofMessage msg){
 
 //--------------------------------------------------------------
 void ofApp::dragEvent(ofDragInfo dragInfo){ 
+
+}
+
+//From http://mathworld.wolfram.com/SpherePointPicking.html
+ofVec4f ofApp::randomPointInSphere(float radius) {
+	float u = ofRandom(1.0f);
+	float v = ofRandom(1.0f);
+
+	float theta = 2.0f * PI * u;
+	float azimuth = acosf(2.0f * v - 1.0f);
+
+	float x = radius * sinf(azimuth) * cosf(theta);
+	float y = radius * sinf(azimuth) * sinf(theta);
+	float z = radius * cosf(azimuth);
+
+	return ofVec4f(x, y, z, 1.0f);
 
 }
